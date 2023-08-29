@@ -1,4 +1,4 @@
-@extends('master')
+@extends('dashboard.index')
 @section('title')
     Create User
 @endsection

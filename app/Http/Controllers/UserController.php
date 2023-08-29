@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -25,28 +26,52 @@ class UserController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(Request $request)
+    // public function create(Request $request)
+    // {
+    //     $validatedData = $request->validate([
+    //         'name' => 'required|string|max:15',
+    //         'email' => 'required|email|unique:users,email',
+    //         'password' => 'required|string|confirmed|min:8',
+    //         'gender' => 'required|in:1,2',
+    //     ]);
+
+    //     $user = User::create([
+    //         'name' => $validatedData['name'],
+    //         'email' => $validatedData['email'],
+    //         'password' => bcrypt($validatedData['password']),
+    //         'gender' => $validatedData['gender'],
+    //     ]);
+
+    //     return redirect()->route('users.index')->with('success', 'User created successfully.');
+    // }
+
+    public function show(User $user)
+    {
+        return view('dashboard.users.show', compact('user'));
+    }
+
+    public function create()
+    {
+        return view('dashboard.users.create');
+    }
+
+    public function store(Request $request)
     {
         $validatedData = $request->validate([
             'name' => 'required|string|max:15',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|string|confirmed|min:8',
+            'password' => 'required|confirmed|min:8',
             'gender' => 'required|in:1,2',
         ]);
 
         $user = User::create([
             'name' => $validatedData['name'],
             'email' => $validatedData['email'],
-            'password' => bcrypt($validatedData['password']),
+            'password' => Hash::make($validatedData['password']),
             'gender' => $validatedData['gender'],
         ]);
 
         return redirect()->route('users.index')->with('success', 'User created successfully.');
-    }
-
-    public function show(User $user)
-    {
-        return view('dashboard.users.show', compact('user'));
     }
 
     /**

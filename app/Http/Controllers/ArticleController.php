@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Article;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+
 
 class ArticleController extends Controller
 {
@@ -36,12 +39,13 @@ class ArticleController extends Controller
             'content' => 'required|string|max:255',
         ]);
 
-        dd(Auth::user());
+        // dd(Auth::user());
+        $user = auth()->user();
 
         $article = Article::create([
             'title' => $validatedData['title'],
             'content' => $validatedData['content'],
-            'user_id' => Auth::user()->id
+            'user_id' => $user->id,
         ]);
 
         return redirect()->route('articles.index')->with('success', 'Article created successfully.');
