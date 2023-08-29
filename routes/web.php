@@ -17,11 +17,6 @@ use App\Http\Controllers\ArticleController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-
 Route::prefix('/admin')->middleware(['auth'])->group(function () {
     Route::get('/', function () {
         return view('master');

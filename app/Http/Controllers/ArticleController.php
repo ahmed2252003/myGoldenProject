@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use App\Models\Article;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-
 
 class ArticleController extends Controller
 {
@@ -16,7 +14,6 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        // $articles = Article::all();
         $articles = Article::paginate(5);
         return view('dashboard.articles.manage-articles', compact('articles'));
     }
@@ -32,20 +29,20 @@ class ArticleController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, User $user, Article $article)
     {
         $validatedData = $request->validate([
-            'title' => 'required|string',
-            'content' => 'required|string|max:255',
+            'title'    => ['required', 'string', 'min:5', 'max:15'],
+            'content'  => ['required', 'string', 'min:15', 'max:150'],
         ]);
 
-        // dd(Auth::user());
-        $user = auth()->user();
+        // dd($request);
+        $user = auth()->id();
 
-        $article = Article::create([
-            'title' => $validatedData['title'],
-            'content' => $validatedData['content'],
-            'user_id' => $user->id,
+        Article::create([
+            'title'      => $validatedData['title'],
+            'content'    => $validatedData['content'],
+            'user_id'    => $user,
         ]);
 
         return redirect()->route('articles.index')->with('success', 'Article created successfully.');
@@ -76,7 +73,6 @@ class ArticleController extends Controller
 
         return redirect()->route('articles.index')->with('success', 'Article updated successfully.');
     }
-
 
     /**
      * Remove the specified resource from storage.

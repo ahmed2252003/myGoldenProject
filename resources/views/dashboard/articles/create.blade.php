@@ -16,11 +16,17 @@
         <div class="card-body">
             <div class="form-group">
                 <label for="exampleInputTitle">Title</label>
-                <input type="text" name="title" class="form-control" id="exampleInputTitle" placeholder="Enter Title">
+                <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" id="exampleInputTitle" placeholder="Enter Title">
+                @error('title')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="exampleInputContent">Content</label>
-                <textarea name="content" class="form-control" id="exampleInputContent" placeholder="Enter content"></textarea>
+                <textarea name="content" class="form-control @error('content') is-invalid @enderror" id="exampleInputContent" placeholder="Enter content"></textarea>
+                @error('content')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
         </div>
         <div class="card-footer">

@@ -1,11 +1,11 @@
 <?php
 
 use App\Models\User;
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
-return new class extends Migration
+class CreateArticlesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,9 +14,10 @@ return new class extends Migration
     {
         Schema::create('articles', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class);
+            $table->foreignId(User::class)->constrained();
             $table->string('title');
             $table->text('content');
+            $table->int('user_id');
             $table->timestamps();
         });
     }
@@ -28,4 +29,4 @@ return new class extends Migration
     {
         Schema::dropIfExists('articles');
     }
-};
+}
