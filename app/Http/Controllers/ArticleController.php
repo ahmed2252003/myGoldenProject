@@ -12,9 +12,15 @@ class ArticleController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $articles = Article::paginate(5);
+        $search = $request->input('search');
+
+        $articles = Article::when($search, function ($query, $search) {
+            return $query->where('title', 'like', '%' . $search . '%')
+                ->orWhere('content', 'like', '%' . $search . '%');
+        })
+            ->paginate(5);
         return view('dashboard.articles.manage-articles', compact('articles'));
     }
 
