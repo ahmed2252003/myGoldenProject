@@ -21,9 +21,21 @@ Route::prefix('/admin')->middleware(['auth'])->group(function () {
     Route::get('/', function () {
         return view('master');
     });
+    
+    Route::get('/Contact-us', function () {
+        return view('pages.contactUs');
+    });
+    
+    Route::get('/FAQ', function () {
+        return view('pages.faq');
+    });
+    
+    Route::get('/Profile', function () {
+        return view('pages.profile');
+    });
 
-    Route::resource('articles', ArticleController::class);
-    Route::resource('users', UserController::class);
+    Route::resource('/articles', ArticleController::class);
+    Route::resource('/users', UserController::class);
 
     Route::get('/{user}/articles', [UserController::class, 'articles'])->name('user-articles');
 });

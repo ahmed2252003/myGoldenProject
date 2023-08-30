@@ -8,17 +8,26 @@
     <li class="nav-item d-none d-sm-inline-block">
       <a href="{{ url('admin') }}" class="nav-link">Home</a>
     </li>
+    
+    <li class="nav-item d-none d-sm-inline-block">
+      <a href="{{ url('admin/Contact-us') }}" class="nav-link">Contact us</a>
+    </li>
+    
+    <li class="nav-item d-none d-sm-inline-block">
+      <a href="{{ url('admin/FAQ') }}" class="nav-link">FAQ</a>
+    </li>
+    
     @auth
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('logout') }}"
-                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                        {{ __('Logout') }}
-                    </a>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        @csrf
-                    </form>
-                </li>
-            @endauth
+      <li class="nav-item">
+          <a class="nav-link" href="{{ route('logout') }}"
+            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+            {{ __('Logout') }}
+          </a>
+          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+          </form>
+      </li>
+    @endauth
   </ul>
 </nav>
 <!-- /.navbar -->
