@@ -13,15 +13,18 @@
                 <h3 class="card-title">Users</h3>
 
                 <div class="card-tools">
-                    <form action="{{ route('users.index') }}" method="GET" class="input-group input-group-sm" style="width: 150px;">
-                        <input type="text" name="search" class="form-control float-right" placeholder="Search" value="{{ request('search') }}">
+                    <form action="{{ route('users.index') }}" method="GET" class="input-group input-group-sm" style="width: 250px;">
+                        <input type="text" name="search" class="form-control" placeholder="Search" value="{{ request('search') }}">
                     
                         <div class="input-group-append">
-                            <button type="submit" class="btn btn-default">
+                            <button type="submit" class="btn btn-primary">
                                 <i class="fas fa-search"></i>
                             </button>
+                            <a href="{{ route('users.index') }}" class="btn btn-secondary">
+                                <i class="fas fa-sync"></i> Refresh
+                            </a>
                         </div>
-                    </form>
+                    </form>                    
                 </div>
             </div>
             <!-- /.card-header -->
@@ -31,7 +34,8 @@
                         <tr>
                             <th>ID</th>
                             <th>User</th>
-                            <th>Gender</th>
+                            <th>Email</th>
+                            {{-- <th>Gender</th> --}}
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -40,13 +44,14 @@
                         <tr>
                             <td>{{ $user->id }}</td>
                             <td>{{ $user->name }}</td>
-                            <td>
+                            <td>{{ $user->email }}</td>
+                            {{-- <td>
                                 @if ($user->gender === 1)
                                     Male
                                 @elseif ($user->gender === 2)
                                     Female
                                 @endif
-                            </td>
+                            </td> --}}
                             <td>
                                 <a href="{{ route('users.show', ['user' => $user->id]) }}"><i class="fas fa-eye"></i></a>
                                 <span class="action-space"></span>
