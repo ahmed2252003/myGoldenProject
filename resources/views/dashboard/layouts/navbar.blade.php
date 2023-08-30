@@ -16,18 +16,26 @@
     <li class="nav-item d-none d-sm-inline-block">
       <a href="{{ url('admin/FAQ') }}" class="nav-link">FAQ</a>
     </li>
-    
-    @auth
-      <li class="nav-item">
-          <a class="nav-link" href="{{ route('logout') }}"
+  </ul>
+
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <img src="{{ asset('dashboard/dist/img/user2-160x160.jpg') }}" width="35" height="35" class="rounded-circle">
+      </a>
+      <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+        <a class="dropdown-item" href="{{ url('admin/Profile') }}">Profile</a>
+        @auth
+          <a class="dropdown-item" href="{{ route('logout') }}"
             onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
             {{ __('Logout') }}
           </a>
           <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
             @csrf
           </form>
-      </li>
     @endauth
+      </div>
+    </li>
   </ul>
 </nav>
 <!-- /.navbar -->

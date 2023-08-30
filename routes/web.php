@@ -31,7 +31,7 @@ Route::prefix('/admin')->middleware(['auth'])->group(function () {
     });
     
     Route::get('/Profile', function () {
-        return view('pages.profile');
+        return view('dashboard.users.profile');
     });
 
     Route::resource('/articles', ArticleController::class);

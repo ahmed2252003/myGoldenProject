@@ -7,6 +7,6 @@
 @endsection
 @section('content')
 <div class="col-md-6">
-    <h4>Welcome <strong>{{ auth()->user()->name }}</strong></h4>
+    <h5>Welcome <strong>{{ auth()->user()->name }}</strong></h5>
 </div>
 @endsection

@@ -2,12 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+    /**user-profile */
+    public function showProfile(User $user)
+    {
+        return view('dashboard.users.profile', compact('user'));
+    }
+
     /**user-articles */
     public function articles(User $user)
     {
@@ -22,28 +29,6 @@ class UserController extends Controller
         $users = User::paginate(5);
         return view('dashboard.users.manage-users', compact('users'));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    // public function create(Request $request)
-    // {
-    //     $validatedData = $request->validate([
-    //         'name' => 'required|string|max:15',
-    //         'email' => 'required|email|unique:users,email',
-    //         'password' => 'required|string|confirmed|min:8',
-    //         'gender' => 'required|in:1,2',
-    //     ]);
-
-    //     $user = User::create([
-    //         'name' => $validatedData['name'],
-    //         'email' => $validatedData['email'],
-    //         'password' => bcrypt($validatedData['password']),
-    //         'gender' => $validatedData['gender'],
-    //     ]);
-
-    //     return redirect()->route('users.index')->with('success', 'User created successfully.');
-    // }
 
     public function show(User $user)
     {
